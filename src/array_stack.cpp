@@ -12,14 +12,26 @@ ArrayStack::ArrayStack(int capacity) {
   }
 
   // TODO: напишите здесь свой код ...
+    capacity_ = capacity;
+    size_ = 0;
+    data_ = new Element[capacity_]{};
 }
 
 ArrayStack::~ArrayStack() {
   // TODO: напишите здесь свой код ...
+    delete[] data_;
+    size_ = 0;
+    capacity_ = 0;
+    data_ = nullptr;
 }
 
 void ArrayStack::Push(Element e) {
   // TODO: напишите здесь свой код ...
+    if(size_ == capacity_){
+        resize(capacity_+kCapacityGrowthCoefficient);
+    }
+    data_[size_] = e;
+    size_++;
 }
 
 void ArrayStack::Pop() {
@@ -28,16 +40,28 @@ void ArrayStack::Pop() {
   }
 
   // TODO: напишите здесь свой код ...
+    data_[size_] = Element::UNDEFINED;
+    size_ --;
 }
 
 void ArrayStack::Clear() {
   // TODO: напишите здесь свой код ...
+    for (int i = 0; i < size_; i++) {
+        data_[i] = Element::UNDEFINED;
+    }
+    size_ = 0;
 }
 
 void ArrayStack::resize(int new_capacity) {
   assert(new_capacity > size_);
 
   // TODO: напишите здесь свой код ...
+    auto *new_data = new Element[new_capacity]{};
+    std::copy(data_, data_ + size_, new_data);
+    capacity_ = new_capacity;
+    delete[] data_;
+    data_ = new_data;
+
 }
 
 // === РЕАЛИЗОВАНО ===
