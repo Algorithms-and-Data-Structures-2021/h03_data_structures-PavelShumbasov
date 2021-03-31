@@ -6,6 +6,16 @@ namespace itis {
 
 void LinkedQueue::Enqueue(Element e) {
   // TODO: напишите здесь свой код ...
+    auto *node = new SinglyNode(e, nullptr);
+    if (size_ == 0) {
+        front_ = node;
+        back_ = node;
+        size_++;
+        return;
+    }
+    back_->next = node;
+    back_ = node;
+    size_++;
 }
 
 void LinkedQueue::Dequeue() {
@@ -14,10 +24,22 @@ void LinkedQueue::Dequeue() {
   }
 
   // TODO: напишите здесь свой код ...
+    if (size_ == 1) {
+        delete back_;
+        back_ = nullptr;
+        front_ = nullptr;
+    } else {
+        SinglyNode *newNode = front_;
+        front_ = front_->next;
+        delete newNode;
+    }
+    size_--;
 }
 
 void LinkedQueue::Clear() {
   // TODO: напишите здесь свой код ...
+    while (size_!= 0)
+        Dequeue();
 }
 
 // === РЕАЛИЗОВАНО ===
