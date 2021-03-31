@@ -21,33 +21,34 @@ void LinkedDequeue::Enqueue(Element e) {
 
 void LinkedDequeue::EnqueueFront(Element e) {
   // TODO: напишите здесь свой код ...
-    auto node = new DoublyNode(e, nullptr, front_);
-    if(front_ == nullptr){
-        front_ = node;
-        back_ = node;
+    if(size_ == 0){
+        DoublyNode *new_node = new DoublyNode(e, nullptr, nullptr);
+        back_ = new_node;
+        front_ = new_node;
+    }else{
+        DoublyNode *new_node = new DoublyNode(e, nullptr, front_);
+        front_->previous = new_node;
+        front_ = new_node;
     }
-    else {
-        front_->previous = node;
-        front_ = node;
-    }
-    size += 1;
+
+    size_++;
 }
 
 void LinkedDequeue::Dequeue() {
   if (size_ == 0) {
     throw std::logic_error("cannot not dequeue from empty queue");
   }
-    DoublyNode *d = front_;
 
-    if (size_ == 1) {
-        delete d;
+  // TODO: напишите здесь свой код ...
+    if (size_ > 1) {
+        DoublyNode *node_to_delete = front_;
+        front_ = node_to_delete->next;
+        delete node_to_delete;
+    } 
+    else {
+        delete front_;
         front_ = nullptr;
         back_ = nullptr;
-    } else {
-
-        front_ = front_->next;
-        front_->previous = nullptr;
-        delete d;
     }
     size_--;
 }
