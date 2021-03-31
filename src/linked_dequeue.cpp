@@ -21,16 +21,16 @@ void LinkedDequeue::Enqueue(Element e) {
 
 void LinkedDequeue::EnqueueFront(Element e) {
   // TODO: напишите здесь свой код ...
-    auto *node = new DoublyNode(e, nullptr, front_);
-
-    if (size_ == 0) {
+    auto node = new DoublyNode(e, nullptr, front_);
+    if(front_ == nullptr){
         front_ = node;
         back_ = node;
-    } else {
-        front_->next = node;
+    }
+    else {
+        front_->previous = node;
         front_ = node;
     }
-    size_++;
+    size += 1;
 }
 
 void LinkedDequeue::Dequeue() {
